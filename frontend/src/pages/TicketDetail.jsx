@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import axios from 'axios'
+import api from '../api'
 import { useParams, useNavigate } from 'react-router-dom'
 
 const statusColors = {
@@ -18,7 +18,7 @@ export default function TicketDetail() {
   const [message, setMessage] = useState('')
 
   const fetchTicket = useCallback(async () => {
-    const res = await axios.get(`/api/tickets/${ticket_id}`)
+    const res = await api.get(`/api/tickets/${ticket_id}`)
     setTicket(res.data)
     setStatus(res.data.status)
   }, [ticket_id])
@@ -31,7 +31,7 @@ export default function TicketDetail() {
     setLoading(true)
     setMessage('')
     try {
-      await axios.put(`/api/tickets/${ticket_id}`, {
+      await api.put(`/api/tickets/${ticket_id}`, {
         status,
         note_text: noteText,
       })

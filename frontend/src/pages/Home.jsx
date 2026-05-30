@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api'
 import { useNavigate } from 'react-router-dom'
 
 const statusColors = {
@@ -22,7 +22,7 @@ export default function Home() {
     const params = {}
     if (search) params.search = search
     if (status) params.status = status
-    const res = await axios.get('/api/tickets', { params })
+    const res = await api.get('/api/tickets', { params })
     setTickets(res.data)
   }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
+import api from '../api'
 import { useNavigate } from 'react-router-dom'
 
 export default function CreateTicket() {
@@ -22,7 +22,7 @@ export default function CreateTicket() {
     setLoading(true)
     setError('')
     try {
-      const res = await axios.post('/api/tickets', form)
+      const res = await api.post('/api/tickets', form)
       navigate(`/tickets/${res.data.ticket_id}`)
     } catch {
       setError('Something went wrong. Please try again.')
